@@ -23,6 +23,7 @@
 		77C1068828588E8F00F355D2 /* CitiesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1068228588E8F00F355D2 /* CitiesInteractor.swift */; };
 		77C1068C285892A500F355D2 /* UIView+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1068B285892A500F355D2 /* UIView+Anchors.swift */; };
 		77C106902858978900F355D2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1068F2858978900F355D2 /* MapViewController.swift */; };
+		77C1069328589A6E00F355D2 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 77C1069228589A6E00F355D2 /* cities.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		77C1068228588E8F00F355D2 /* CitiesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesInteractor.swift; sourceTree = "<group>"; };
 		77C1068B285892A500F355D2 /* UIView+Anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchors.swift"; sourceTree = "<group>"; };
 		77C1068F2858978900F355D2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		77C1069228589A6E00F355D2 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,8 @@
 		77C1064C28588E4700F355D2 /* SiriusChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				77C1069428589A9E00F355D2 /* Util */,
+				77C1069228589A6E00F355D2 /* cities.json */,
 				77C1068A2858929400F355D2 /* Extension */,
 				77C1068928588E9700F355D2 /* Scene */,
 				77C1064D28588E4700F355D2 /* AppDelegate.swift */,
@@ -178,6 +182,13 @@
 				77C1068F2858978900F355D2 /* MapViewController.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		77C1069428589A9E00F355D2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C1069328589A6E00F355D2 /* cities.json in Resources */,
 				77C1065A28588E5E00F355D2 /* LaunchScreen.storyboard in Resources */,
 				77C1065728588E5E00F355D2 /* Assets.xcassets in Resources */,
 				77C1065528588E4700F355D2 /* Main.storyboard in Resources */,

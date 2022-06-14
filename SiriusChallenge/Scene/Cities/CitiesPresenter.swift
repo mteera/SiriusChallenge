@@ -8,16 +8,16 @@
 import UIKit
 
 protocol CitiesPresentationLogic {
-  func presentSomething(response: City.Something.Response)
+  func presentCities(response: Cities.InitialData.Response)
 }
 
 class CitiesPresenter: CitiesPresentationLogic {
-  weak var viewController: CitiesDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: City.Something.Response) {
-    let viewModel = City.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: CitiesDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentCities(response: Cities.InitialData.Response) {
+        let viewModel = Cities.InitialData.ViewModel(cities: response.cities)
+        viewController?.displayCities(viewModel: viewModel)
+    }
 }

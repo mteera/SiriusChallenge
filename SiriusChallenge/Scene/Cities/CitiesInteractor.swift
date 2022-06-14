@@ -8,7 +8,8 @@
 import UIKit
 
 protocol CitiesBusinessLogic {
-  func doSomething(request: City.Something.Request)
+    func initialLoad(request: Cities.InitialData.Request)
+    
 }
 
 protocol CitiesDataStore {
@@ -16,17 +17,16 @@ protocol CitiesDataStore {
 }
 
 class CitiesInteractor: CitiesBusinessLogic, CitiesDataStore {
-  var presenter: CitiesPresentationLogic?
-  var worker: CitiesWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: City.Something.Request) {
-    worker = CitiesWorker()
-    worker?.doSomeWork()
+    var presenter: CitiesPresentationLogic?
+    var worker: CitiesWorker = CitiesWorker()
     
-    let response = City.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    func initialLoad(request: Cities.InitialData.Request) {
+        worker.listAllCities { cities, error in
+            var response = Cities.InitialData.Response(cities: [])
+            if let cities = cities {
+                response = Cities.InitialData.Response(cities: cities)
+            }
+            self.presenter?.presentCities(response: response)
+        }
+    }
 }

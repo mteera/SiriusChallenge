@@ -7,12 +7,13 @@
 import UIKit
 
 protocol CitiesDisplayLogic: class {
-    func displaySomething(viewModel: City.Something.ViewModel)
+    func displayCities(viewModel: Cities.InitialData.ViewModel)
 }
 
 class CitiesViewController: UIViewController, CitiesDisplayLogic {
     var interactor: CitiesBusinessLogic?
     var router: (NSObjectProtocol & CitiesRoutingLogic & CitiesDataPassing)?
+    var viewModel: Cities.InitialData.ViewModel?
     
     // MARK: Properties
     lazy var tableView: UITableView = {
@@ -71,22 +72,33 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
         setup()
         view.backgroundColor = .white
         setupViews()
+        initialData()
     }
     
-    func displaySomething(viewModel: City.Something.ViewModel) {
+    func initialData() {
+        let request = Cities.InitialData.Request()
+        interactor?.initialLoad(request: request)
+    }
+    
+    func displayCities(viewModel: Cities.InitialData.ViewModel) {
+        self.viewModel = viewModel
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = "Hurzuf UA"
-        cell.detailTextLabel?.text = "Lng: 34.283333  Lat: 4.549999"
+        guard let city = viewModel?.cities[indexPath.row] else { return cell }
+        cell.textLabel?.text = city.name
+        cell.detailTextLabel?.text = "Lon: \(city.coord.lon)  Lat: \(city.coord.lat)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return viewModel?.cities.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
