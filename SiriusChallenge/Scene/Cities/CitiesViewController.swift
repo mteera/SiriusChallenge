@@ -8,13 +8,16 @@ import UIKit
 
 protocol CitiesDisplayLogic: class {
     func displayCities(viewModel: Cities.InitialData.ViewModel)
+    func displayFilteredCities(viewModel: Cities.InitialData.ViewModel)
+    func displayCityDetails()
 }
 
 class CitiesViewController: UIViewController, CitiesDisplayLogic {
     var interactor: CitiesBusinessLogic?
-    var router: (NSObjectProtocol & CitiesRoutingLogic & CitiesDataPassing)?
-    var viewModel: Cities.InitialData.ViewModel?
-    
+    var router: (CitiesRoutingLogic & CitiesDataPassing)?
+    var filteredCitites: [City] = []
+    var allCitites: [City] = []
+
     // MARK: Properties
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -47,25 +50,13 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
     
     func setupViews() {
         view.addSubview(tableView)
-        
         navigationItem.titleView = searchBar
-        
         tableView.anchor(view.safeAreaLayoutGuide.topAnchor,
                          left: view.safeAreaLayoutGuide.leftAnchor,
                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
                          right: view.safeAreaLayoutGuide.rightAnchor)
     }
-    
-    // MARK: Routing
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
+        
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,33 +72,56 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
     }
     
     func displayCities(viewModel: Cities.InitialData.ViewModel) {
-        self.viewModel = viewModel
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        self.allCitites = viewModel.cities
+        self.filteredCitites = viewModel.cities
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
+    }
+    
+    func displayFilteredCities(viewModel: Cities.InitialData.ViewModel) {
+        self.filteredCitites = viewModel.cities
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+    func displayCityDetails() {
+        router?.routeToMap()
     }
 }
 
 extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        guard let city = viewModel?.cities[indexPath.row] else { return cell }
+        let city = filteredCitites[indexPath.row]
         cell.textLabel?.text = city.name
         cell.detailTextLabel?.text = "Lon: \(city.coord.lon)  Lat: \(city.coord.lat)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.cities.count ?? 0
+        return filteredCitites.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router?.routeToMap()
+        tableView.deselectRow(at: indexPath, animated: true)
+        let city = filteredCitites[indexPath.row]
+        interactor?.select(city)
     }
+    
 }
 
 extension CitiesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        if searchText.isEmpty {
+            filteredCitites = allCitites
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+            return
+        }
+        interactor?.searchFor(searchText)
     }
 }
+
+

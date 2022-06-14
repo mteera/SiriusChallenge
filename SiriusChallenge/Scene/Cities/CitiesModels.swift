@@ -21,7 +21,8 @@ enum Cities {
   }
 }
 
-struct City: Codable {
+struct City: Codable, Comparable {
+    
     let country, name: String
     let id: Int
     let coord: Coord
@@ -41,6 +42,9 @@ struct City: Codable {
     }
 }
 
+// MARK: - Coordinates
 struct Coord: Codable {
     let lon, lat: Double
 }
+
+

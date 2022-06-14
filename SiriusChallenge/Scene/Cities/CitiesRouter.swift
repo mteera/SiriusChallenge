@@ -21,7 +21,16 @@ class CitiesRouter: NSObject, CitiesRoutingLogic, CitiesDataPassing {
   
   // MARK: Routing
     func routeToMap() {
-        viewController?.navigationController?.pushViewController(MapViewController(), animated: true)
+        let destinationVC = MapViewController()
+        if let dataStore = dataStore, let selectedCity = dataStore.selectedCity {
+            let viewModel = MapView.InitialData.ViewModel(city: selectedCity)
+            destinationVC.configure(viewModel: viewModel)
+            viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+        }
+    }
+    
+    func passDataToMap(source: CitiesDataStore, destination: inout MapViewDataStore) {
+        destination.selectedCity = source.selectedCity
     }
     
 }

@@ -20,7 +20,6 @@ class CitiesWorker: CitiesWorkerProtocol {
                 } catch {
                     completion(nil, error)
                 }
-                completion(nil, nil)
             } catch {
                 completion(nil, error)
             }
