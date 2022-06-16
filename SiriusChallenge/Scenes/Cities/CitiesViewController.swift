@@ -33,7 +33,6 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
         return searchBar
     }()
     
-    
     // MARK: Setup 
     private func setup() {
         let viewController = self
@@ -51,10 +50,12 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
     func setupViews() {
         view.addSubview(tableView)
         navigationItem.titleView = searchBar
+        
         tableView.anchor(view.safeAreaLayoutGuide.topAnchor,
                          left: view.safeAreaLayoutGuide.leftAnchor,
                          bottom: view.safeAreaLayoutGuide.bottomAnchor,
                          right: view.safeAreaLayoutGuide.rightAnchor)
+        tableView.showActivityIndicator()
     }
         
     // MARK: View lifecycle
@@ -68,7 +69,7 @@ class CitiesViewController: UIViewController, CitiesDisplayLogic {
     
     func initialData() {
         let request = Cities.InitialData.Request()
-        interactor?.initialLoad(request: request)
+        interactor?.initialData(request: request)
     }
     
     func displayCities(viewModel: Cities.InitialData.ViewModel) {
@@ -125,3 +126,18 @@ extension CitiesViewController: UISearchBarDelegate {
 }
 
 
+extension UITableView {
+    func showActivityIndicator() {
+        DispatchQueue.main.async { [weak self] in
+            let activityView = UIActivityIndicatorView(style: .medium)
+            self?.backgroundView = activityView
+            activityView.startAnimating()
+        }
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async { [weak self] in
+            self?.backgroundView = nil
+        }
+    }
+}

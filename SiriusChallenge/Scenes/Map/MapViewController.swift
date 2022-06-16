@@ -8,9 +8,7 @@
 import UIKit
 import MapKit
 
-protocol MapViewDisplayLogic {
-    func displayCity(viewModel: MapView.InitialData.ViewModel )
-}
+protocol MapViewDisplayLogic {}
 
 class MapViewController: UIViewController {
     var interactor: MapViewInteractor?
@@ -69,13 +67,6 @@ class MapViewController: UIViewController {
     
 }
 
-extension MapViewController: MapViewDisplayLogic {
-    func displayCity(viewModel: MapView.InitialData.ViewModel) {
-
-    }
-}
-
-
 enum MapView {
     enum InitialData {
         struct Request {}
@@ -95,10 +86,7 @@ protocol MapViewPresentationLogic {
 
 class MapViewPresenter: MapViewPresentationLogic {
     weak var viewController: MapViewController?
-    func presentCity(response: MapView.InitialData.Response) {
-        let viewModel = MapView.InitialData.ViewModel(city: response.city)
-        viewController?.displayCity(viewModel: viewModel)
-    }
+    func presentCity(response: MapView.InitialData.Response) {}
 }
 
 protocol MapViewBusinessLogic {

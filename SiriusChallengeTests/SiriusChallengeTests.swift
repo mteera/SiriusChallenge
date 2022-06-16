@@ -8,29 +8,81 @@
 import XCTest
 @testable import SiriusChallenge
 
-class SiriusChallengeTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+struct Cities {
+    enum All {
+        static func response() -> [City]? {
+            do {
+                return try JSONDecoder().decode(
+                    [City].self,
+                    from: MockAPI().loadJsonData(
+                        fileName: "GetCitiesListSuccess"))
+            } catch {
+                return nil
+            }
         }
     }
-
+    
+    enum Alphabetical {
+        static func response() -> [City]? {
+            do {
+                return try JSONDecoder().decode(
+                    [City].self,
+                    from: MockAPI().loadJsonData(
+                        fileName: "GetCitiesAlphabeticalSuccess"))
+            } catch {
+                return nil
+            }
+        }
+    }
+    
 }
+
+class SiriusChallengeTests: XCTestCase {
+
+    func testBinarySearchResultValue() throws {
+        let interactor = CitiesInteractor()
+        let sampleData = Cities.All.response() ?? [City]()
+        let sortedCitiesModels = sampleData.sorted { $0 < $1 }
+        let bangkokCityModel = sampleData[1]
+        let searchResult = interactor.binarySearch(in: sortedCitiesModels, for: "b")
+        XCTAssertEqual(bangkokCityModel, searchResult[0])
+    }
+    
+    func testBinarySearchResultsCount() {
+        let interactor = CitiesInteractor()
+        let sampleData = Cities.All.response() ?? [City]()
+        let sortedCitiesModels = sampleData.sorted { $0 < $1 }
+        let searchResult = interactor.binarySearch(in: sortedCitiesModels, for: "a")
+        XCTAssertEqual(searchResult.count, 4, "Search Results should be 4")
+    }
+    
+    func testBinarySearchIsCaseSensitive() {
+        let interactor = CitiesInteractor()
+        let sampleData = Cities.Alphabetical.response() ?? [City]()
+        let sortedCitiesModels = sampleData.sorted { $0 < $1 }
+        let searchResultOfB = interactor.binarySearch(in: sortedCitiesModels, for: "B")
+        let searchResultOfb = interactor.binarySearch(in: sortedCitiesModels, for: "b")
+        XCTAssertEqual(searchResultOfB.count, searchResultOfb.count, "Search Results for both b and B should be same")
+    }
+    
+    func testBinarySearchResultsAreAlphabeticallySorted() {
+        let interactor = CitiesInteractor()
+        let sampleData = Cities.Alphabetical.response() ?? [City]()
+        let sortedCitiesModels = sampleData.sorted { $0 < $1 }
+        let searchResult = interactor.binarySearch(in: sortedCitiesModels, for: "a")
+        
+        XCTAssertEqual(searchResult[0].name, "aav", "1st")
+        XCTAssertEqual(searchResult[1].name, "Abc", "2nd")
+        XCTAssertEqual(searchResult[2].name, "Acd", "3rd")
+    }
+    
+    func testInvalidSearchInput() {
+        let interactor = CitiesInteractor()
+        let sampleData = Cities.All.response() ?? [City]()
+        let sortedCitiesModels = sampleData.sorted { $0 < $1 }
+        let searchResult = interactor.binarySearch(in: sortedCitiesModels, for: "Zx")
+        XCTAssertEqual(searchResult.count, 0, "Search results for prefix Zx should be 0")
+    }
+  
+}
+

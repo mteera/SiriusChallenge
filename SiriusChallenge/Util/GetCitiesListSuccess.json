@@ -1,0 +1,47 @@
+[
+    {
+        "country": "US",
+        "name": "Alabama",
+        "_id": 707860,
+        "coord": {
+            "lon": 34.283333,
+            "lat": 44.549999
+        }
+    },
+    {
+        "country": "TH",
+        "name": "Bangkok Yai",
+        "_id": 1619457,
+        "coord": {
+            "lon": 100.475998,
+            "lat": 13.72319
+        }
+    },
+    {
+        "country": "US",
+        "name": "Albuquerque",
+        "_id": 519188,
+        "coord": {
+            "lon": 37.666668,
+            "lat": 55.683334
+        }
+    },
+    {
+        "country": "US",
+        "name": "Anaheim",
+        "_id": 1283378,
+        "coord": {
+            "lon": 84.633331,
+            "lat": 28
+        }
+    },
+    {
+        "country": "US",
+        "name": "Arizona",
+        "_id": 1270260,
+        "coord": {
+            "lon": 76,
+            "lat": 29
+        }
+    }
+]

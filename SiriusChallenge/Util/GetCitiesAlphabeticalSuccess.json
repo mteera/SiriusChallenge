@@ -1,0 +1,7 @@
+[
+    {"country":"US","name":"Abc","_id":707860,"coord":{"lon":34.283333,"lat":44.549999}},
+    {"country":"US","name":"Acd","_id":708546,"coord":{"lon":33.900002,"lat":44.599998}},
+    {"country":"US","name":"BAa","_id":519188,"coord":{"lon":37.666668,"lat":55.683334}},
+    {"country":"US","name":"bBa","_id":1283378,"coord":{"lon":84.633331,"lat":28}},
+    {"country":"US","name":"aav","_id":1270260,"coord":{"lon":76,"lat":29}}
+]
