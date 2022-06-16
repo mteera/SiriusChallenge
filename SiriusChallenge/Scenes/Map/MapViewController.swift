@@ -67,58 +67,9 @@ class MapViewController: UIViewController {
     
 }
 
-enum MapView {
-    enum InitialData {
-        struct Request {}
-        struct Response {
-            let city: City
-        }
-        struct ViewModel {
-            let city: City
-        }
-    }
-}
 
 
-protocol MapViewPresentationLogic {
-    func presentCity(response: MapView.InitialData.Response)
-}
-
-class MapViewPresenter: MapViewPresentationLogic {
-    weak var viewController: MapViewController?
-    func presentCity(response: MapView.InitialData.Response) {}
-}
-
-protocol MapViewBusinessLogic {
-    func initialData(request: MapView.InitialData.Request)
-}
-
-protocol MapViewDataStore {
-    var selectedCity: City? { get set }
-}
 
 
-@objc protocol MapViewRoutingLogic {
-    func routeToMap()
-}
-
-protocol MapViewDataPassing {
-    var dataStore: MapViewDataStore? { get }
-}
-
-class MapViewInteractor: MapViewBusinessLogic, MapViewDataStore {
-    var presenter: MapViewPresenter?
-    var selectedCity: City?
-    
-    func initialData(request: MapView.InitialData.Request) {
-        guard let selectedCity = selectedCity else { return }
-        presenter?.presentCity(response: MapView.InitialData.Response(city: selectedCity))
-    }
-}
 
 
-class MapViewRouter {
-    var viewController: MapViewController?
-    var dataStore: MapViewDataStore?
-    
-}
