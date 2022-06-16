@@ -13,7 +13,7 @@
 		77088FB4285B345600FCA420 /* MapViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77088FB3285B345600FCA420 /* MapViewInteractor.swift */; };
 		77088FB6285B34BB00FCA420 /* MapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77088FB5285B34BB00FCA420 /* MapViewPresenter.swift */; };
 		77088FB8285B34CC00FCA420 /* MapViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77088FB7285B34CC00FCA420 /* MapViewModels.swift */; };
-		77088FBA285B350800FCA420 /* MApViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77088FB9285B350800FCA420 /* MApViewRouter.swift */; };
+		77088FBA285B350800FCA420 /* MapViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77088FB9285B350800FCA420 /* MapViewRouter.swift */; };
 		77C1064E28588E4700F355D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1064D28588E4700F355D2 /* AppDelegate.swift */; };
 		77C1065028588E4700F355D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1064F28588E4700F355D2 /* SceneDelegate.swift */; };
 		77C1065728588E5E00F355D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77C1065628588E5E00F355D2 /* Assets.xcassets */; };
@@ -56,7 +56,7 @@
 		77088FB3285B345600FCA420 /* MapViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewInteractor.swift; sourceTree = "<group>"; };
 		77088FB5285B34BB00FCA420 /* MapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewPresenter.swift; sourceTree = "<group>"; };
 		77088FB7285B34CC00FCA420 /* MapViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModels.swift; sourceTree = "<group>"; };
-		77088FB9285B350800FCA420 /* MApViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MApViewRouter.swift; sourceTree = "<group>"; };
+		77088FB9285B350800FCA420 /* MapViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRouter.swift; sourceTree = "<group>"; };
 		77C1064A28588E4700F355D2 /* SiriusChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SiriusChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77C1064D28588E4700F355D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77C1064F28588E4700F355D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				77088FB5285B34BB00FCA420 /* MapViewPresenter.swift */,
-				77088FB9285B350800FCA420 /* MApViewRouter.swift */,
+				77088FB9285B350800FCA420 /* MapViewRouter.swift */,
 				77088FB7285B34CC00FCA420 /* MapViewModels.swift */,
 				77C1068F2858978900F355D2 /* MapViewController.swift */,
 				77088FB3285B345600FCA420 /* MapViewInteractor.swift */,
@@ -356,7 +356,7 @@
 				77C1065028588E4700F355D2 /* SceneDelegate.swift in Sources */,
 				77088FB4285B345600FCA420 /* MapViewInteractor.swift in Sources */,
 				77C1068828588E8F00F355D2 /* CitiesInteractor.swift in Sources */,
-				77088FBA285B350800FCA420 /* MApViewRouter.swift in Sources */,
+				77088FBA285B350800FCA420 /* MapViewRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
